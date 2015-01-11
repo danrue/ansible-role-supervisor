@@ -1,0 +1,29 @@
+[program:{{supervisor_program}}]
+command={{supervisor_command}}
+process_name=%(program_name)s
+numprocs={{supervisor_numprocs|default(1)}}
+directory={{supervisor_directory|default('/tmp')}}
+umask={{supervisor_umask|default('022')}}
+priority={{supervisor_priority|default('999')}}
+autostart={{supervisor_autostart|default('true')}}
+autorestart={{supervisor_autorestart|default('true')}}
+startsecs={{supervisor_startsecs|default('10')}}
+startretries={{supervisor_startretries|default('3')}}
+exitcodes={{supervisor_exitcodes|default('0,2')}}
+stopsignal={{supervisor_stopsignal|default('TERM')}}
+stopwaitsecs={{supervisor_stopwaitsecs|default('10')}}
+user={{supervisor_user|default('root')}}
+redirect_stderr={{supervisor_redirect_stderr|default('false')}}
+stdout_logfile=/var/log/supervisor/{{supervisor_program}}/stdout.log
+stdout_logfile_maxbytes={{supervisor_stdout_logfile_maxbytes|default('25MB')}}
+stdout_logfile_backups={{supervisor_stdout_logfile_backups|default('10')}}
+stdout_capture_maxbytes={{supervisor_stdout_capture_maxbytes|default('5MB')}}
+stderr_logfile=/var/log/supervisor/{{supervisor_program}}/stderr.log
+stderr_logfile_maxbytes={{supervisor_stderr_logfile_maxbytes|default('25MB')}}
+stderr_logfile_backups={{supervisor_stderr_logfile_backups|default('10')}}
+stderr_capture_maxbytes={{supervisor_stderr_capture_maxbytes|default('5MB')}}
+environment={%- for key in supervisor_environment.keys() -%}
+{{key}}="{{supervisor_environment[key]}}"{%- if loop.revindex0 > 0 -%},{%- endif -%}
+{% endfor %}
+
+serverurl=AUTO

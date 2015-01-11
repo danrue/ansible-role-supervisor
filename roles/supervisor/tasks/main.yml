@@ -1,0 +1,8 @@
+---
+- apt: name=supervisor
+- file: state=directory path=/var/log/supervisor 
+- file: state=directory path=/var/log/supervisor/{{supervisor_program}}
+- template: 
+    src=supervisor.conf.j2
+    dest=/etc/supervisor/conf.d/{{ supervisor_program }}.conf
+  notify: restart supervisor

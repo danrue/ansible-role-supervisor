@@ -1,0 +1,4 @@
+- url: s3://sps-build-deploy/ansible/pip-0.0.0.tgz
+  paths:
+    - from: .
+      to: roles/pip
