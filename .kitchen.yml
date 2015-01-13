@@ -12,12 +12,7 @@ provisioner:
   ansible_yum_repo: https://download.fedoraproject.org/pub/epel/6/i386/epel-release-6-8.noarch.rpm  #Ansible recommends using EPEL
   ansible_version: 1.8.2
   playbook: test/test.yml
-  extra_vars:
-    supervisor_program: cat
-    supervisor_command: /bin/cat
-    supervisor_environment:
-      PATH: /usr/bin
-      LIB: /tmp
+
 platforms:
   - name: ubuntu-14.04
 
