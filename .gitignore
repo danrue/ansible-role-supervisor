@@ -5,3 +5,5 @@ inventory/groups
 .vagrant/
 .kitchen/
 roles/pip
+VERSION
+roles/supervisor/VERSION
