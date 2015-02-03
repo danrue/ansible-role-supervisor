@@ -7,4 +7,4 @@ gem 'serverspec', '>= 2.0.0'
 gem 'ansible-sdk', git: 'git@github.com:spscommerce/ansible-sdk.git'
 
 
-gem 'thor-scmversion'
+gem 'thor-scmversion'gem 'thor-scmversion'
