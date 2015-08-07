@@ -1,0 +1,19 @@
+---
+- hosts: test
+  sudo: true
+  roles:
+    - role: ./
+      supervisor_program: testprog
+      supervisor_command: > 
+        /usr/local/bin/sigtrap.sh 
+        "echo -n 'started' > /tmp/status"
+        "echo -n 'ended' > /tmp/status"
+  post_tasks:
+    - command: grep started /tmp/status
+      register: statuschk
+      changed_when: false
+    - command: supervisorctl stop testprog
+    - command: sleep 1
+    - command: grep ended /tmp/status
+      register: statuschk
+      changed_when: false

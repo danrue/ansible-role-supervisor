@@ -23,7 +23,7 @@ function restart {
   $start_command
 }
 
-trap shutdown SIGTERM SIGINT SIGQUIT
+trap shutdown SIGTERM SIGINT SIGQUIT SIGKILL
 
 start
 while [[ $state == 'running' ]]; do 
