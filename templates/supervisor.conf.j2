@@ -25,8 +25,9 @@ stderr_logfile_maxbytes={{item.supervisor_stderr_logfile_maxbytes|default('25MB'
 stderr_logfile_backups={{item.supervisor_stderr_logfile_backups|default('10')}}
 stderr_capture_maxbytes={{item.supervisor_stderr_capture_maxbytes|default('5MB')}}
 serverurl=AUTO
-{%- if item.supervisor_environment is defined %}
-{% for key, value in item.supervisor_environment.iteritems() %}
-{{key}}="{{value}}"{%- if loop.revindex0 > 0 -%},{%- endif %}
-{% endfor %}
-{%- endif %}
+{% if item.supervisor_options is defined %}{% for key, value in item.supervisor_options.iteritems() %}
+{{key}}={{value}}
+{% endfor %}{% endif %}
+{% if item.supervisor_environment is defined %}environment={%- for key, value in item.supervisor_environment.iteritems() -%}
+{{key}}="{{value}}"{%- if loop.revindex0 > 0 -%},{%- endif -%}
+{% endfor %}{% endif %}

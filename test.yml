@@ -15,6 +15,7 @@
               "echo -n 'started' > /tmp/status2"
               "echo -n 'ended' > /tmp/status2"
           supervisor_environment: { "theanswer": "42" }
+          supervisor_options: { strip_ansi: false, loglevel: info }
   roles:
     - role: ansible-role-supervisor
 
