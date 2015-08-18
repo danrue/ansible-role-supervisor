@@ -1,0 +1,23 @@
+- supervisorctl: name={{item.supervisor_program}} state=started
+  changed_when: false
+  register: modout
+  with_items: supervisor_programs
+# explicit test of idempotence for module call
+- supervisorctl: name={{item.supervisor_program}} state=started
+  with_items: supervisor_programs
+
+- wait_for: path={{item}} search_regex=started
+  with_items:
+    - /tmp/status
+    - /tmp/status2
+
+- command: supervisorctl status {{item.supervisor_program}}
+  register: processchk
+  with_items: supervisor_programs
+  changed_when: false
+
+- name: confirm supervisor status output for programz(starting or running)
+  assert:
+    that:
+      - "'STARTING' in item.stdout or 'RUNNING' in item.stdout"
+  with_items: processchk.results

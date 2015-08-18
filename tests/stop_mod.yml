@@ -1,0 +1,23 @@
+- supervisorctl: name={{item.supervisor_program}} state=stopped
+  register: modout
+  changed_when: false
+  with_items: supervisor_programs
+# explicit test of idempotence for module call
+- supervisorctl: name={{item.supervisor_program}} state=stopped
+  with_items: supervisor_programs
+
+- wait_for: path={{item}} search_regex=ended
+  with_items:
+    - /tmp/status
+    - /tmp/status2
+
+- command: supervisorctl status {{item.supervisor_program}}
+  register: processchk
+  with_items: supervisor_programs
+  changed_when: false
+
+- name: confirm supervisor status output for programz(stopped)
+  assert:
+    that:
+      - "'STOPPED' in item.stdout"
+  with_items: processchk.results

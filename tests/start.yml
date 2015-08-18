@@ -1,0 +1,25 @@
+- command: supervisorctl start {{item.supervisor_program}}
+  changed_when: false
+  with_items: supervisor_programs
+  ##explicit test for idempotence
+- command: supervisorctl start {{item.supervisor_program}}
+  register: output
+  changed_when: output.stdout.find('already') == -1
+  with_items: supervisor_programs
+
+- wait_for: path={{item}} search_regex=started
+  with_items:
+    - /tmp/status
+    - /tmp/status2
+
+- command: supervisorctl status {{item.supervisor_program}}
+  register: processchk
+  changed_when: false
+  with_items: supervisor_programs
+
+- name: confirm supervisor status output for programz(started or running)
+  assert:
+    that:
+      - "'STARTING' in item.stdout or 'RUNNING' in item.stdout"
+  with_items: processchk.results
+

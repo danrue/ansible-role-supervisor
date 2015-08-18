@@ -1,19 +1,35 @@
 ---
 - hosts: test
   sudo: true
+  vars:
+    ##we will use these in our tests otherwise could scope to role
+    supervisor_programs:
+        - supervisor_program: testprog
+          supervisor_command: >
+              /usr/local/bin/sigtrap.sh
+              "echo -n 'started' > /tmp/status"
+              "echo -n 'ended' > /tmp/status"
+        - supervisor_program: testprog2
+          supervisor_command: >
+              /usr/local/bin/sigtrap.sh
+              "echo -n 'started' > /tmp/status2"
+              "echo -n 'ended' > /tmp/status2"
+          supervisor_environment: { "theanswer": "42" }
   roles:
-    - role: ./
-      supervisor_program: testprog
-      supervisor_command: > 
-        /usr/local/bin/sigtrap.sh 
-        "echo -n 'started' > /tmp/status"
-        "echo -n 'ended' > /tmp/status"
+    - role: ansible-role-supervisor
+
   post_tasks:
-    - command: grep started /tmp/status
-      register: statuschk
-      changed_when: false
-    - command: supervisorctl stop testprog
-    - command: sleep 1
-    - command: grep ended /tmp/status
-      register: statuschk
-      changed_when: false
+    - include: tests/autostart.yml
+      tags: ['tests', 'autostart']
+   
+    - include: tests/stop.yml
+      tags: ['tests', 'stop']
+
+    - include: tests/start.yml
+      tags: ['tests', 'start']
+
+    - include: tests/stop_mod.yml
+      tags: ['tests', 'stop_module']
+
+    - include: tests/start_mod.yml
+      tags: ['tests', 'start_module']
