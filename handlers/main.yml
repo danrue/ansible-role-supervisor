@@ -2,3 +2,7 @@
 # handlers file for example
 - name: restart supervisor
   service: name=supervisor state=restarted
+
+- name: restart supervisor apps
+  supervisorctl: name={{item.supervisor_program}} state=restarted
+  with_items: supervisor_programs

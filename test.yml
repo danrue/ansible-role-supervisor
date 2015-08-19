@@ -34,3 +34,5 @@
 
     - include: tests/start_mod.yml
       tags: ['tests', 'start_module']
+  
+  handlers:

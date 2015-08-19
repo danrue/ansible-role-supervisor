@@ -1,8 +1,1 @@
 ---
-supervisor_programs:
-- supervisor_program: testprog
-  supervisor_command: > 
-    /usr/local/bin/sigtrap.sh 
-    "echo -n 'started' > /tmp/status"
-    "echo -n 'ended' > /tmp/status"
-  supervisor_environment: { }
