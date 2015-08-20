@@ -1,7 +1,17 @@
 ---
 # handlers file for example
 - name: restart supervisor
-  service: name=supervisor state=restarted
+  command: /bin/true
+  notify:
+    - stop supervisor
+    - start supervisor
+
+- name: stop supervisor
+  service: name=supervisor state=stopped
+  ignore_errors: true
+
+- name: start supervisor
+  service: name=supervisor state=started
 
 - name: restart supervisor apps
   supervisorctl: name={{item.supervisor_program}} state=restarted
