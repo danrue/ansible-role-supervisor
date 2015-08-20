@@ -4,11 +4,14 @@
   command: /bin/true
   notify:
     - stop supervisor
+    - sleep supervisor
     - start supervisor
 
 - name: stop supervisor
   service: name=supervisor state=stopped
-  ignore_errors: true
+
+- name: sleep supervisor
+  pause: seconds=15
 
 - name: start supervisor
   service: name=supervisor state=started
