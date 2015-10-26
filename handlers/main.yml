@@ -4,10 +4,14 @@
   command: /bin/true
   notify:
     - stop supervisor
+    - wait stop supervisor 
     - start supervisor
 
 - name: stop supervisor
   service: name=supervisor state=stopped
+
+- name: wait stop supervisor
+  wait_for: path=/var/run/supervisor.sock state=absent timeout=30
 
 - name: start supervisor
   service: name=supervisor state=started
