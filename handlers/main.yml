@@ -11,7 +11,11 @@
   service: name=supervisor state=stopped
 
 - name: wait stop supervisor
-  wait_for: path=/var/run/supervisor.sock state=absent timeout=30
+  action: shell ps aux
+  register: supresult
+  until: supresult.stdout.find("supervisord") == -1
+  retries: 30
+  delay: 1
 
 - name: start supervisor
   service: name=supervisor state=started

@@ -1,4 +1,4 @@
-FROM ansible/ubuntu14.04-ansible:devel
+FROM ansible/ubuntu14.04-ansible:stable
 MAINTAINER acyost@spscommerce.com
 ADD . /tmp/ansible-role-supervisor
 ## IGNORE THE HAND WAVING HUMAN
