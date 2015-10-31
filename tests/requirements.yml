@@ -1,0 +1,2 @@
+- src: git+ssh:/git@github.com/simplyadrian/ansible-role-supervisor.git
+  name: supervisor
