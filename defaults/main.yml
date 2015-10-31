@@ -1,4 +1,4 @@
 ---
 
-supervisor_version: 3.0 
+supervisor_version: 3.0b2-1 
 supervisor_environment: { }
