@@ -1,0 +1,4 @@
+---
+# handlers file for example
+- name: restart supervisor
+  service: name=supervisor state=restarted
