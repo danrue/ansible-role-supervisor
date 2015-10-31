@@ -1,5 +1,7 @@
 ---
-- apt: name=supervisor
+- apt:
+    pkg: supervisor 
+    name: "supervisor={{ supervisor_version }}"
 - file: state=directory path=/var/log/supervisor 
 - file: state=directory path=/var/log/supervisor/{{supervisor_program}}
 - copy: src=sigtrap.sh dest=/usr/local/bin owner=root group=root mode=0755

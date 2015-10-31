@@ -1,3 +1,6 @@
+*.swp
+Dockerfile
+tests/roles/*
 build/*
 !build/.keep
 inventory/vagrant
