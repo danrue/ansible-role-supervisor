@@ -2,10 +2,20 @@
 - apt: name=supervisor
 - file: state=directory path=/var/log/supervisor 
 
+- file: state=directory path=/var/log/supervisor/{{supervisor_program}}
+  when: supervisor_program is defined
+
 - file: state=directory path=/var/log/supervisor/{{item.supervisor_program}}
   with_items: supervisor_programs
 
 - copy: src=sigtrap.sh dest=/usr/local/bin owner=root group=root mode=0755
+
+- template: 
+    src=supervisor.conf.single.j2
+    dest=/etc/supervisor/conf.d/{{ supervisor_program }}.conf
+  when: supervisor_program is defined
+  notify: restart supervisor
+
 - template: 
     src=supervisor.conf.j2
     dest=/etc/supervisor/conf.d/{{ item.supervisor_program }}.conf

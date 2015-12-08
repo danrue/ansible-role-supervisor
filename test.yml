@@ -18,6 +18,11 @@
           supervisor_options: { strip_ansi: false, loglevel: info }
   roles:
     - role: ansible-role-supervisor
+      supervisor_program: testprog3
+      supervisor_command: >
+        /usr/local/bin/sigtrap.sh
+        "echo -n 'started' > /tmp/status3"
+        "echo -n 'ended' > /tmp/status3"
 
   post_tasks:
     - include: tests/autostart.yml
@@ -34,5 +39,8 @@
 
     - include: tests/start_mod.yml
       tags: ['tests', 'start_module']
+    
+    - include: tests/single.yml
+      tags: ['tests', 'single']
   
   handlers:
