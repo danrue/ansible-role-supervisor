@@ -1,6 +1,6 @@
 [program:{{supervisor_program}}]
 command={{supervisor_command}}
-process_name=%(program_name)s
+process_name={{supervisor_process_name}}
 numprocs={{supervisor_numprocs|default(1)}}
 directory={{supervisor_directory|default('/tmp')}}
 umask={{supervisor_umask|default('022')}}

@@ -2,3 +2,4 @@
 
 supervisor_version: 3.0b2-1 
 supervisor_environment: { }
+supervisor_process_name: '%(program_name)s'
