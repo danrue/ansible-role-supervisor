@@ -1,3 +1,2 @@
 ---
-supervisor_programs: []
 supervisor_environment: { }

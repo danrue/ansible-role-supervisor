@@ -10,14 +10,5 @@
 
 - copy: src=sigtrap.sh dest=/usr/local/bin owner=root group=root mode=0755
 
-- template: 
-    src=supervisor.conf.single.j2
-    dest=/etc/supervisor/conf.d/{{ supervisor_program }}.conf
-  when: supervisor_program is defined
-  notify: restart supervisor
-
-- template: 
-    src=supervisor.conf.j2
-    dest=/etc/supervisor/conf.d/{{ item.supervisor_program }}.conf
-  notify: restart supervisor
-  with_items: supervisor_programs
+- include: programs.yml
+  when: supervisor_program is defined or supervisor_programs is defined
