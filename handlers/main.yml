@@ -2,3 +2,7 @@
 # handlers file for example
 - name: restart supervisor
   service: name=supervisor state=restarted
+  register: supervisor_restarted
+  until: supervisor_restarted|success
+  retries: 5
+  delay: 5
