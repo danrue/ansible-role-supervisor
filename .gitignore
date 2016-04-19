@@ -10,3 +10,5 @@ inventory/groups
 roles/pip
 VERSION
 roles/supervisor/VERSION
+.idea
+*.iml

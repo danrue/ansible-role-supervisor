@@ -3,3 +3,4 @@
 supervisor_version: 3.0b2-1 
 supervisor_environment: { }
 supervisor_process_name: '%(program_name)s'
+supervisor_restart_sleep: 5  # Version of supervisor above defaults to 5 second sleep between stop and start in /etc/init.d/supervisor ($DODTIME)
