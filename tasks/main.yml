@@ -9,3 +9,9 @@
     src=supervisor.conf.j2
     dest=/etc/supervisor/conf.d/{{ supervisor_program }}.conf
   notify: restart supervisor
+  when: supervisor_restart_on_finish|bool
+
+- template:
+    src=supervisor.conf.j2
+    dest=/etc/supervisor/conf.d/{{ supervisor_program }}.conf
+  when: not supervisor_restart_on_finish|bool
