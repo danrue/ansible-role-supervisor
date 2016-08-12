@@ -7,6 +7,7 @@ Role Variables
 | variable | description | default | mandatory
 |----------|-------------|---------|----------
 | `supervisor_program` | Job name | none | yes
+| `supervisor_programs` | List of job names. In this case, all the additional supervisor options would be dictionary entries under each job name. | [] | yes
 | `supervisor_command` | command to run a process | none | yes
 | `supervisor_process_name` | A Python string expression that is used to compose the supervisor process name for this process. Important only with supervisor_numprocs usage | yes | no
 | `supervisor_numprocs` | Supervisor will start as many instances of this program as named by numprocs. Note that if numprocs > 1, the supervisor_process_name expression must include %(process_num)s | 1 | no
