@@ -1,3 +1,6 @@
+*.swp
+Dockerfile
+tests/roles/*
 build/*
 !build/.keep
 inventory/vagrant
@@ -7,3 +10,5 @@ inventory/groups
 roles/pip
 VERSION
 roles/supervisor/VERSION
+.idea
+*.iml
