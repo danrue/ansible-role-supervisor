@@ -2,7 +2,6 @@
 - hosts: test
   sudo: true
   vars:
-    ##we will use these in our tests otherwise could scope to role
     supervisor_programs:
         - supervisor_program: testprog
           supervisor_command: >
