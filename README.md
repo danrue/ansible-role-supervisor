@@ -9,7 +9,6 @@ Role Variables
 | `supervisor_program` | Job name | none | yes
 | `supervisor_programs` | List of job names. In this case, all the additional supervisor options would be dictionary entries under each job name. | [] | yes
 | `supervisor_command` | command to run a process | none | yes
-| `supervisor_process_name` | A Python string expression that is used to compose the supervisor process name for this process. Important only with supervisor_numprocs usage | yes | no
 | `supervisor_numprocs` | Supervisor will start as many instances of this program as named by numprocs. Note that if numprocs > 1, the supervisor_process_name expression must include %(process_num)s | 1 | no
 | `supervisor_directory` | A file path representing a directory to which supervisord should temporarily chdir before exec’ing the child | /tmp | no
 | `supervisor_umask` | The umask of the supervisord process. | 022 | no
@@ -35,8 +34,6 @@ Role Variables
 | `supervisor_stderr_capture_maxbytes` | Max number of bytes written to capture FIFO when process is in “stderr capture mode”  | 5MB | no
 | `supervisor_environment` | A list of key/value pairs in the form KEY="val",KEY2="val2" that will be placed in the child process’ environment | { } | no
 | `supervisor_version` | supervisor version to be installed | 3.0b2-1  | no
-| `supervisor_restart_on_finish` | notify handler which restarts supervisor | true | no
-| `supervisor_restart_sleep` | Version of supervisor above defaults to 5 second sleep between stop and start in /etc/init.d/supervisor | 5 | no
 
 Example Playbook
 ------------
