@@ -41,9 +41,9 @@ Example Playbook
   roles: 
     - role: supervisor
       supervisor_program: flower
-      supervisor_command: /bin/bash -c "C_FORCE_ROOT=1 DJANGO_SETTINGS_MODULE=fulfillment_importer.settings /opt/sps/fulfillment-importer/virtualenv/bin/celery flower --app=fulfillment_importer.celery.celery"
-      supervisor_directory: /opt/sps/fulfillment-importer/app
-      supervisor_user: fulfillment-importer
+      supervisor_command: /bin/bash -c "C_FORCE_ROOT=1 DJANGO_SETTINGS_MODULE=importer.settings /opt/importer/virtualenv/bin/celery flower --app=importer.celery.celery"
+      supervisor_directory: /opt/importer/app
+      supervisor_user: importer
       supervisor_environment:
-        APP_LOG_DIR: /opt/sps/fulfillment-importer/logs/flower
+        APP_LOG_DIR: /opt/importer/logs/flower
 ```
